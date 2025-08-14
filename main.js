@@ -31,16 +31,11 @@ async function weatherFn(cName) {
 
 function weatherShowFn(data) {
 	$('#city-name').text(data.name);
-	$('#date').text(moment().
-		format('MMMM Do YYYY, h:mm:ss a'));
-	$('#temperature').
-		html(`${data.main.temp}°C`);
-	$('#description').
-		text(data.weather[0].description);
-	$('#wind-speed').
-		html(`Wind Speed: ${data.wind.speed} m/s`);
-	$('#weather-icon').
-		attr('src',
-			`...`);
+	$('#date').text(moment().format('MMMM Do YYYY, h:mm:ss a'));
+	$('#temperature').html(`${data.main.temp}°C`);
+	$('#description').text(data.weather[0].description);
+	$('#wind-speed').html(`Wind Speed: ${data.wind.speed} m/s`);
+	$('#weather-icon').attr('src', `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`);
+	$('#weather-icon').attr('alt', data.weather[0].description);
 	$('#weather-info').fadeIn();
 }
