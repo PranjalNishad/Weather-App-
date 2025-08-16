@@ -24,7 +24,7 @@ $(document).ready(function () {
   });
 });
 
-// fetching weather details
+// fetching weather details(continue from here)
 
 async function weatherFn(cName) {
 	const temp =`${url}?q=${cName}&appid=${apiKey}&units=metric`;
