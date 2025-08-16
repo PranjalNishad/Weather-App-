@@ -1,10 +1,27 @@
-const url ='https://api.openweathermap.org/data/2.5/weather';
-const apiKey ='f00c38e0279b7bc85480c3fe775d518c';
+const url = 'https://api.openweathermap.org/data/2.5/weather';
+const geoUrl = 'https://api.openweathermap.org/geo/1.0/direct';
+const apiKey = 'f00c38e0279b7bc85480c3fe775d518c';
 
-// initial calling default location
-
+// Default city when page loads
 $(document).ready(function () {
-	weatherFn('Pune');
+  weatherFn('Pune');
+
+  // Allow Enter key to trigger search
+  $('#city-input').keypress(function (e) {
+    if (e.which === 13) {
+      $('#city-input-btn').click();
+    }
+  });
+
+  // Click handler (instead of inline onclick in HTML)
+  $('#city-input-btn').click(function () {
+    const city = $('#city-input').val().trim();
+    if (city) {
+      weatherFn(city);
+    } else {
+      alert('Please enter a city name');
+    }
+  });
 });
 
 // fetching weather details
