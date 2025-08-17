@@ -27,32 +27,64 @@ $(document).ready(function () {
 // fetching weather details(continue from here)
 
 async function weatherFn(cName) {
-	const temp =`${url}?q=${cName}&appid=${apiKey}&units=metric`;
+  try {
+    // 1. Get coordinates of the city
+    const geoRes = await fetch(
+      `${geoUrl}?q=${encodeURIComponent(cName)}&limit=1&appid=${apiKey}`,
+      { cache: 'no-store' }
+    );
+    const geoData = await geoRes.json();
+    if (!geoData.length) {
+      return alert('City not found. Please try again.');
+    }
 
-// fetch request to api , converts api response to json format (light weight data change format which is easy to read for humans)
+    const { lat, lon, name, state, country } = geoData[0];
 
-	try {
-		const res = await fetch(temp);
-		const data = await res.json();
-		if (res.ok) {
-			weatherShowFn(data);
-		} else {
-			alert('City not found. Please try again.');
-		}
-	} catch (error) {
-		console.error('Error fetching weather data:', error);
-	}
+    // 2. Get weather using lat/lon (more accurate than city name only)
+    const res = await fetch(
+      `${url}?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`,
+      { cache: 'no-store' }
+    );
+    const data = await res.json();
+    if (!res.ok) {
+      return alert(data.message || 'Error fetching weather data');
+    }
+
+    // 3. Display results
+    weatherShowFn(data, { name, state, country });
+  } catch (error) {
+    console.error('Error fetching weather data:', error);
+    alert('Network error. Please try again later.');
+  }
 }
 
-// displaying weather data , moment library
+// Display weather data
+// function weatherShowFn(data, place = {}) {
+//   const label = [place.name, place.state, place.country].filter(Boolean).join(', ');
+//   $('#city-name').text(label || data.name);
 
-function weatherShowFn(data) {
-	$('#city-name').text(data.name);
-	$('#date').text(moment().format('MMMM Do YYYY, h:mm:ss a'));
-	$('#temperature').html(`${data.main.temp}°C`);
-	$('#description').text(data.weather[0].description);
-	$('#wind-speed').html(`Wind Speed: ${data.wind.speed} m/s`);
-	$('#weather-icon').attr('src', `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`);
-	$('#weather-icon').attr('alt', data.weather[0].description);
-	$('#weather-info').fadeIn();
-}
+  // Local time (using timezone offset from API)
+//   const localTime = moment.unix(data.dt)
+//     .utcOffset(data.timezone / 60)
+//     .format('MMMM Do YYYY, h:mm A');
+//   $('#date').text(localTime);
+
+  // Temperature with feels-like
+//   $('#temperature').html(
+//     `${Math.round(data.main.temp)}°C (feels like ${Math.round(data.main.feels_like)}°C)`
+//   );
+
+  // Description, wind, humidity
+//   $('#description').text(data.weather[0].description);
+//   $('#wind-speed').html(`Wind: ${Math.round(data.wind.speed)} m/s`);
+//   if (data.main.humidity !== undefined) {
+//     $('#wind-speed').append(`<br>Humidity: ${data.main.humidity}%`);
+//   }
+
+  // Weather icon
+//   $('#weather-icon')
+//     .attr('src', `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`)
+//     .attr('alt', data.weather[0].description);
+
+//   $('#weather-info').fadeIn();
+// }
