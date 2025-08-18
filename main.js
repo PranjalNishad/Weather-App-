@@ -59,9 +59,9 @@ async function weatherFn(cName) {
 }
 
 // Display weather data
-// function weatherShowFn(data, place = {}) {
-//   const label = [place.name, place.state, place.country].filter(Boolean).join(', ');
-//   $('#city-name').text(label || data.name);
+function weatherShowFn(data, place = {}) {
+  const label = [place.name, place.state, place.country].filter(Boolean).join(', ');
+  $('#city-name').text(label || data.name);
 
   // Local time (using timezone offset from API)
 //   const localTime = moment.unix(data.dt)
@@ -87,4 +87,4 @@ async function weatherFn(cName) {
 //     .attr('alt', data.weather[0].description);
 
 //   $('#weather-info').fadeIn();
-// }
+}
