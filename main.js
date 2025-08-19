@@ -64,8 +64,8 @@ function weatherShowFn(data, place = {}) {
   $('#city-name').text(label || data.name);
 
   // Local time (using timezone offset from API)
-//   const localTime = moment.unix(data.dt)
-//     .utcOffset(data.timezone / 60)
+  const localTime = moment.unix(data.dt)
+    .utcOffset(data.timezone / 60)
 //     .format('MMMM Do YYYY, h:mm A');
 //   $('#date').text(localTime);
 
