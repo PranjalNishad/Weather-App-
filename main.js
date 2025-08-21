@@ -67,7 +67,7 @@ function weatherShowFn(data, place = {}) {
   const localTime = moment.unix(data.dt)
     .utcOffset(data.timezone / 60)
     .format('MMMM Do YYYY, h:mm A');
-//   $('#date').text(localTime);
+    $('#date').text(localTime);
 
   // Temperature with feels-like
 //   $('#temperature').html(
