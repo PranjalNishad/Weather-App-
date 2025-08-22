@@ -70,9 +70,9 @@ function weatherShowFn(data, place = {}) {
     $('#date').text(localTime);
 
   // Temperature with feels-like
-//   $('#temperature').html(
-//     `${Math.round(data.main.temp)}°C (feels like ${Math.round(data.main.feels_like)}°C)`
-//   );
+  $('#temperature').html(
+    `${Math.round(data.main.temp)}°C (feels like ${Math.round(data.main.feels_like)}°C)`
+  );
 
   // Description, wind, humidity
 //   $('#description').text(data.weather[0].description);
