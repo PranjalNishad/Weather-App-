@@ -78,7 +78,7 @@ function weatherShowFn(data, place = {}) {
   $('#description').text(data.weather[0].description);
   $('#wind-speed').html(`Wind: ${Math.round(data.wind.speed)} m/s`);
   if (data.main.humidity !== undefined) {
-//     $('#wind-speed').append(`<br>Humidity: ${data.main.humidity}%`);
+    $('#wind-speed').append(`<br>Humidity: ${data.main.humidity}%`);
   }
 
   // Weather icon
@@ -87,4 +87,5 @@ function weatherShowFn(data, place = {}) {
 //     .attr('alt', data.weather[0].description);
 
 //   $('#weather-info').fadeIn();
+
 }
