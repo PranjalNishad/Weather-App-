@@ -84,9 +84,10 @@ function weatherShowFn(data, place = {}) {
   // Weather icon
   $('#weather-icon')
     .attr('src', `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`)
-//     .attr('alt', data.weather[0].description);
+    .attr('alt', data.weather[0].description);
 
 //   $('#weather-info').fadeIn();
 
 }
+
 
