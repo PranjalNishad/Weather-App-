@@ -86,8 +86,9 @@ function weatherShowFn(data, place = {}) {
     .attr('src', `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`)
     .attr('alt', data.weather[0].description);
 
-//   $('#weather-info').fadeIn();
+  $('#weather-info').fadeIn();
 
 }
+
 
 
