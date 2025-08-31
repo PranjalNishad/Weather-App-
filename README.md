@@ -1,4 +1,4 @@
-🌦 Weather App
+🌦 **Weather App**
 
 A simple and responsive Weather Forecast Web Application built with HTML, CSS, JavaScript, jQuery, and OpenWeatherMap API.
 The app allows users to search for any city worldwide and view real-time weather details such as temperature, feels-like temperature, weather description, wind speed, humidity, and local date & time.
