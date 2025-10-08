@@ -89,6 +89,3 @@ function weatherShowFn(data, place = {}) {
   $('#weather-info').fadeIn();
 
 }
-
-
-
